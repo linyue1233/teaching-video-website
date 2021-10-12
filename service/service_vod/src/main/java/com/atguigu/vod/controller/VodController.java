@@ -30,7 +30,7 @@ public class VodController {
     public R uploadAlyiVideo(MultipartFile file) {
         //返回上传视频id
         String videoId = vodService.uploadVideoAly(file);
-        return R.ok().data("videoId",videoId);
+        return R.ok().data("videoId", videoId);
     }
 
     //根据视频id删除阿里云视频
@@ -46,9 +46,9 @@ public class VodController {
             //调用初始化对象的方法实现删除
             client.getAcsResponse(request);
             return R.ok();
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new GuliException(20001,"删除视频失败");
+            throw new GuliException(20001, "删除视频失败");
         }
     }
 

@@ -30,7 +30,7 @@ public class EduChapterController {
     @GetMapping("getChapterVideo/{courseId}")
     public R getChapterVideo(@PathVariable String courseId) {
         List<ChapterVo> list = chapterService.getChapterVideoByCourseId(courseId);
-        return R.ok().data("allChapterVideo",list);
+        return R.ok().data("allChapterVideo", list);
     }
 
     //添加章节
@@ -44,7 +44,7 @@ public class EduChapterController {
     @GetMapping("getChapterInfo/{chapterId}")
     public R getChapterInfo(@PathVariable String chapterId) {
         EduChapter eduChapter = chapterService.getById(chapterId);
-        return R.ok().data("chapter",eduChapter);
+        return R.ok().data("chapter", eduChapter);
     }
 
     //修改章节
@@ -58,7 +58,7 @@ public class EduChapterController {
     @DeleteMapping("{chapterId}")
     public R deleteChapter(@PathVariable String chapterId) {
         boolean flag = chapterService.deleteChapter(chapterId);
-        if(flag) {
+        if (flag) {
             return R.ok();
         } else {
             return R.error();

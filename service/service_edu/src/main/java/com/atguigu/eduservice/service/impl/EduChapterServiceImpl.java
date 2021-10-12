@@ -37,12 +37,12 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
         //1 根据课程id查询课程里面所有的章节
         QueryWrapper<EduChapter> wrapperChapter = new QueryWrapper<>();
-        wrapperChapter.eq("course_id",courseId);
+        wrapperChapter.eq("course_id", courseId);
         List<EduChapter> eduChapterList = baseMapper.selectList(wrapperChapter);
 
         //2 根据课程id查询课程里面所有的小节
         QueryWrapper<EduVideo> wrapperVideo = new QueryWrapper<>();
-        wrapperVideo.eq("course_id",courseId);
+        wrapperVideo.eq("course_id", courseId);
         List<EduVideo> eduVideoList = videoService.list(wrapperVideo);
 
         //创建list集合，用于最终封装数据
@@ -55,7 +55,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
             EduChapter eduChapter = eduChapterList.get(i);
             //eduChapter对象值复制到ChapterVo里面
             ChapterVo chapterVo = new ChapterVo();
-            BeanUtils.copyProperties(eduChapter,chapterVo);
+            BeanUtils.copyProperties(eduChapter, chapterVo);
             //把chapterVo放到最终list集合
             finalList.add(chapterVo);
 
@@ -67,10 +67,10 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
                 //得到每个小节
                 EduVideo eduVideo = eduVideoList.get(m);
                 //判断：小节里面chapterid和章节里面id是否一样
-                if(eduVideo.getChapterId().equals(eduChapter.getId())) {
+                if (eduVideo.getChapterId().equals(eduChapter.getId())) {
                     //进行封装
                     VideoVo videoVo = new VideoVo();
-                    BeanUtils.copyProperties(eduVideo,videoVo);
+                    BeanUtils.copyProperties(eduVideo, videoVo);
                     //放到小节封装集合
                     videoList.add(videoVo);
                 }
@@ -86,16 +86,16 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     public boolean deleteChapter(String chapterId) {
         //根据chapterid章节id 查询小节表，如果查询数据，不进行删除
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
-        wrapper.eq("chapter_id",chapterId);
+        wrapper.eq("chapter_id", chapterId);
         int count = videoService.count(wrapper);
         //判断
-        if(count >0) {//查询出小节，不进行删除
-            throw new GuliException(20001,"不能删除");
+        if (count > 0) {//查询出小节，不进行删除
+            throw new GuliException(20001, "不能删除");
         } else { //不能查询数据，进行删除
             //删除章节
             int result = baseMapper.deleteById(chapterId);
             //成功  1>0   0>0
-            return result>0;
+            return result > 0;
         }
     }
 
@@ -103,7 +103,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     @Override
     public void removeChapterByCourseId(String courseId) {
         QueryWrapper<EduChapter> wrapper = new QueryWrapper<>();
-        wrapper.eq("course_id",courseId);
+        wrapper.eq("course_id", courseId);
         baseMapper.delete(wrapper);
     }
 }

@@ -34,7 +34,7 @@ public class EduSubjectController {
     @PostMapping("addSubject")
     public R addSubject(MultipartFile file) {
         //上传过来excel文件
-        subjectService.saveSubject(file,subjectService);
+        subjectService.saveSubject(file, subjectService);
         return R.ok();
     }
 
@@ -43,7 +43,7 @@ public class EduSubjectController {
     public R getAllSubject() {
         //list集合泛型是一级分类
         List<OneSubject> list = subjectService.getAllOneTwoSubject();
-        return R.ok().data("list",list);
+        return R.ok().data("list", list);
     }
 
 }

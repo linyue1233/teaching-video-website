@@ -44,11 +44,11 @@ public class EduVideoController {
         EduVideo eduVideo = videoService.getById(id);
         String videoSourceId = eduVideo.getVideoSourceId();
         //判断小节里面是否有视频id
-        if(!StringUtils.isEmpty(videoSourceId)) {
+        if (!StringUtils.isEmpty(videoSourceId)) {
             //根据视频id，远程调用实现视频删除
             R result = vodClient.removeAlyVideo(videoSourceId);
-            if(result.getCode() == 20001) {
-                throw new GuliException(20001,"删除视频失败，熔断器...");
+            if (result.getCode() == 20001) {
+                throw new GuliException(20001, "删除视频失败，熔断器...");
             }
         }
         //删除小节

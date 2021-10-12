@@ -47,11 +47,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //1 向课程表添加课程基本信息
         //CourseInfoVo对象转换eduCourse对象
         EduCourse eduCourse = new EduCourse();
-        BeanUtils.copyProperties(courseInfoVo,eduCourse);
+        BeanUtils.copyProperties(courseInfoVo, eduCourse);
         int insert = baseMapper.insert(eduCourse);
-        if(insert == 0) {
+        if (insert == 0) {
             //添加失败
-            throw new GuliException(20001,"添加课程信息失败");
+            throw new GuliException(20001, "添加课程信息失败");
         }
 
         //获取添加之后课程id
@@ -74,7 +74,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //1 查询课程表
         EduCourse eduCourse = baseMapper.selectById(courseId);
         CourseInfoVo courseInfoVo = new CourseInfoVo();
-        BeanUtils.copyProperties(eduCourse,courseInfoVo);
+        BeanUtils.copyProperties(eduCourse, courseInfoVo);
 
         //2 查询描述表
         EduCourseDescription courseDescription = courseDescriptionService.getById(courseId);
@@ -88,10 +88,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public void updateCourseInfo(CourseInfoVo courseInfoVo) {
         //1 修改课程表
         EduCourse eduCourse = new EduCourse();
-        BeanUtils.copyProperties(courseInfoVo,eduCourse);
+        BeanUtils.copyProperties(courseInfoVo, eduCourse);
         int update = baseMapper.updateById(eduCourse);
-        if(update == 0) {
-            throw new GuliException(20001,"修改课程信息失败");
+        if (update == 0) {
+            throw new GuliException(20001, "修改课程信息失败");
         }
 
         //2 修改描述表
@@ -123,8 +123,8 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         //4 根据课程id删除课程本身
         int result = baseMapper.deleteById(courseId);
-        if(result == 0) { //失败返回
-            throw new GuliException(20001,"删除失败");
+        if (result == 0) { //失败返回
+            throw new GuliException(20001, "删除失败");
         }
     }
 

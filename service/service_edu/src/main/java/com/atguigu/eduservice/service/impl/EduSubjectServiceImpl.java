@@ -31,13 +31,13 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
 
     //添加课程分类
     @Override
-    public void saveSubject(MultipartFile file,EduSubjectService subjectService) {
+    public void saveSubject(MultipartFile file, EduSubjectService subjectService) {
         try {
             //文件输入流
             InputStream in = file.getInputStream();
             //调用方法进行读取
-            EasyExcel.read(in, SubjectData.class,new SubjectExcelListener(subjectService)).sheet().doRead();
-        }catch(Exception e){
+            EasyExcel.read(in, SubjectData.class, new SubjectExcelListener(subjectService)).sheet().doRead();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -47,12 +47,12 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
     public List<OneSubject> getAllOneTwoSubject() {
         //1 查询所有一级分类  parentid = 0
         QueryWrapper<EduSubject> wrapperOne = new QueryWrapper<>();
-        wrapperOne.eq("parent_id","0");
+        wrapperOne.eq("parent_id", "0");
         List<EduSubject> oneSubjectList = baseMapper.selectList(wrapperOne);
 
         //2 查询所有二级分类  parentid != 0
         QueryWrapper<EduSubject> wrapperTwo = new QueryWrapper<>();
-        wrapperTwo.ne("parent_id","0");
+        wrapperTwo.ne("parent_id", "0");
         List<EduSubject> twoSubjectList = baseMapper.selectList(wrapperTwo);
 
         //创建list集合，用于存储最终封装数据
@@ -69,7 +69,7 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
 //            oneSubject.setId(eduSubject.getId());
 //            oneSubject.setTitle(eduSubject.getTitle());
             //eduSubject值复制到对应oneSubject对象里面
-            BeanUtils.copyProperties(eduSubject,oneSubject);
+            BeanUtils.copyProperties(eduSubject, oneSubject);
             //多个OneSubject放到finalSubjectList里面
             finalSubjectList.add(oneSubject);
 
@@ -81,10 +81,10 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
                 //获取每个二级分类
                 EduSubject tSubject = twoSubjectList.get(m);
                 //判断二级分类parentid和一级分类id是否一样
-                if(tSubject.getParentId().equals(eduSubject.getId())) {
+                if (tSubject.getParentId().equals(eduSubject.getId())) {
                     //把tSubject值复制到TwoSubject里面，放到twoFinalSubjectList里面
                     TwoSubject twoSubject = new TwoSubject();
-                    BeanUtils.copyProperties(tSubject,twoSubject);
+                    BeanUtils.copyProperties(tSubject, twoSubject);
                     twoFinalSubjectList.add(twoSubject);
                 }
             }

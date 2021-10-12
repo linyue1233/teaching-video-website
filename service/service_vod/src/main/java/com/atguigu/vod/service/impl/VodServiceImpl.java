@@ -33,7 +33,7 @@ public class VodServiceImpl implements VodService {
             String title = fileName.substring(0, fileName.lastIndexOf("."));
             //inputStream：上传文件输入流
             InputStream inputStream = file.getInputStream();
-            UploadStreamRequest request = new UploadStreamRequest(ConstantVodUtils.ACCESS_KEY_ID,ConstantVodUtils.ACCESS_KEY_SECRET, title, fileName, inputStream);
+            UploadStreamRequest request = new UploadStreamRequest(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET, title, fileName, inputStream);
 
             UploadVideoImpl uploader = new UploadVideoImpl();
             UploadStreamResponse response = uploader.uploadStream(request);
@@ -45,7 +45,7 @@ public class VodServiceImpl implements VodService {
                 videoId = response.getVideoId();
             }
             return videoId;
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -67,9 +67,9 @@ public class VodServiceImpl implements VodService {
             request.setVideoIds(videoIds);
             //调用初始化对象的方法实现删除
             client.getAcsResponse(request);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new GuliException(20001,"删除视频失败");
+            throw new GuliException(20001, "删除视频失败");
         }
     }
 

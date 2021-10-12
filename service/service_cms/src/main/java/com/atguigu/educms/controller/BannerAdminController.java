@@ -27,10 +27,10 @@ public class BannerAdminController {
 
     //1 分页查询banner
     @GetMapping("pageBanner/{page}/{limit}")
-    public R pageBanner(@PathVariable long page,@PathVariable long limit) {
-        Page<CrmBanner> pageBanner = new Page<>(page,limit);
-        bannerService.page(pageBanner,null);
-        return R.ok().data("items",pageBanner.getRecords()).data("total",pageBanner.getTotal());
+    public R pageBanner(@PathVariable long page, @PathVariable long limit) {
+        Page<CrmBanner> pageBanner = new Page<>(page, limit);
+        bannerService.page(pageBanner, null);
+        return R.ok().data("items", pageBanner.getRecords()).data("total", pageBanner.getTotal());
     }
 
     //2 添加banner

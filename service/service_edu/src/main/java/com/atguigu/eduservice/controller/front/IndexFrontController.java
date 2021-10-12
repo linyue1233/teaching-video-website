@@ -40,7 +40,7 @@ public class IndexFrontController {
         wrapperTeacher.last("limit 4");
         List<EduTeacher> teacherList = teacherService.list(wrapperTeacher);
 
-        return R.ok().data("eduList",eduList).data("teacherList",teacherList);
+        return R.ok().data("eduList", eduList).data("teacherList", teacherList);
     }
 
 }
